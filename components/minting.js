@@ -11,13 +11,13 @@ export default function minting({}) {
         🔥 RELEASING THIS FRIDAY, MARCH 29th 🔥
       </h3>
 
-      <section className={styles.mintArea}>
+      {/* <section className={styles.mintArea}>
         <div className={styles.mintInfo}>
           <MintingUBAllowlist />
           <MintingAllowlist />
           <MintingPublic />
         </div>
-      </section>
+      </section> */}
 
       <iframe
         className={styles.trailer}
