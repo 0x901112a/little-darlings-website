@@ -1,6 +1,8 @@
 import Image from "next/image";
 import styles from "./minting.module.css";
-import MintingUB from "./minting_ub";
+import MintingUBAllowlist from "./minting_ub_allowlist";
+import MintingAllowlist from "./minting_allowlist";
+import MintingPublic from "./minting_public"
 
 export default function minting({}) {
   return (
@@ -11,15 +13,9 @@ export default function minting({}) {
 
       <section className={styles.mintArea}>
         <div className={styles.mintInfo}>
-          <MintingUB />
-
-          {/* *********************************** */}
-          {/* Friends Allowlist                   */}
-          {/* *********************************** */}
-
-          {/* *********************************** */}
-          {/* Public                              */}
-          {/* *********************************** */}
+          <MintingUBAllowlist />
+          <MintingAllowlist />
+          <MintingPublic />
         </div>
       </section>
 

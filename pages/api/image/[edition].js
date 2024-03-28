@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     if (editionNumber + 1 > lastMintedToken) {
       const provider = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
         ? new providers.AlchemyProvider("mainnet", process.env.NEXT_PUBLIC_ALCHEMY_API_KEY)
-        : new providers.AlchemyProvider("sepolia", process.env.NEXT_PUBLIC_ALCHEMY_API_KEY)
+        : new ethers.providers.JsonRpcProvider(`https://eth-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`)
       const contract = new ethers.Contract(address, LittleDarlingsABI, provider)
       const totalSupply = await contract.totalSupply().then(token => token.toNumber())
       if (editionNumber + 1 > totalSupply) {

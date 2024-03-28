@@ -15,7 +15,7 @@ const littleDarlingsContract = {
 };
 import { ethers } from "ethers";
 
-export default function minting_ub() {
+export default function minting_ub_allowlist() {
   // State hooks
   const [UBMintQuantity, setUBMintQuantity] = useState(1);
 
@@ -65,20 +65,6 @@ export default function minting_ub() {
       ),
     },
   });
-  useEffect(() => {
-    console.log("quantity", ethers.BigNumber.from(UBMintQuantity || "1"));
-    console.log("proof", UBAllowlistMintProof?.data?.proof);
-    console.log(
-      "amount",
-      ethers.BigNumber.from(getAllowlistUBMintPrice?.data || "0").mul(
-        ethers.BigNumber.from(UBMintQuantity || "1")
-      )
-    );
-  }, [
-    UBMintQuantity,
-    UBAllowlistMintProof?.data?.proof,
-    getAllowlistUBMintPrice?.data,
-  ]);
   const UBAllowlistMint = useContractWrite(configUBAllowlistMint?.data);
   const UBAllowlistMintWait = useWaitForTransaction({
     hash: UBAllowlistMint.data?.hash,
@@ -163,7 +149,7 @@ export default function minting_ub() {
           )}
         </p>
       ) : (
-        <p>The Ugly Bitches allowlist is not open</p>
+        <p>The Ugly Bitches allowlist mint is not open</p>
       )}
     </>
   );
