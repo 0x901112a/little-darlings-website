@@ -203,7 +203,7 @@ export default function Home() {
       )} */}
 
       <section className="splash">
-        {true && <WalletConnect></WalletConnect>}
+        {/* {true && <WalletConnect></WalletConnect>} */}
         <Dolls
           src="/images/littledarlingsavengers_vivid.png"
           alt="A group of ugly bitches dolls"
