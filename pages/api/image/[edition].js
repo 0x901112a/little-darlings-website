@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
 import { ethers, providers } from 'ethers'
-import UglyBitchesABI from '../../../contracts/UglyBitches.json';
+import LittleDarlingsABI from '../../../contracts/LittleDarlings.json';
 const address = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS
 
 export default async function handler(req, res) {
@@ -11,8 +11,8 @@ export default async function handler(req, res) {
     if (editionNumber + 1 > lastMintedToken) {
       const provider = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
         ? new providers.AlchemyProvider("mainnet", process.env.NEXT_PUBLIC_ALCHEMY_API_KEY)
-        : new providers.AlchemyProvider("goerli", process.env.NEXT_PUBLIC_ALCHEMY_API_KEY)
-      const contract = new ethers.Contract(address, UglyBitchesABI, provider)
+        : new providers.AlchemyProvider("sepolia", process.env.NEXT_PUBLIC_ALCHEMY_API_KEY)
+      const contract = new ethers.Contract(address, LittleDarlingsABI, provider)
       const totalSupply = await contract.totalSupply().then(token => token.toNumber())
       if (editionNumber + 1 > totalSupply) {
         res.status(400).json({ error: true, message: 'Image not found.' })

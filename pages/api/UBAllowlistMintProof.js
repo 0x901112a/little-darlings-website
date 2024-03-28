@@ -1,6 +1,6 @@
 import { getMerkleProof } from '/utils/merkle.js'
 
-const allowlist = require('/data/allowlistFreeMint.json');
+const allowlist = require('/data/UBAllowlistMint.json');
 
 const handler = async (req, res) => {
 
@@ -19,7 +19,7 @@ const handler = async (req, res) => {
   res.setHeader('Cache-Control', 's-maxage=15552000');
   res.status(200).json( {
     proof: getMerkleProof(allowlist, address),
-    valid: getMerkleProof(allowlist, address).length > 0
+    valid: getMerkleProof(allowlist, address).length > 0,
   });
 
 }

@@ -1,6 +1,6 @@
 import { getMerkleRoot } from '/utils/merkle.js'
 
-const allowlist = require('/data/allowlistFreeMint.json');
+const allowlist = require('/data/allowlistMint.json');
 
 const handler = async (req, res) => {
 

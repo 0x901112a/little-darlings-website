@@ -8,7 +8,12 @@
       },
       {
         "internalType": "uint256",
-        "name": "reservedFreeMint_",
+        "name": "maxPerWalletUBAllowlist_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "maxPerWalletAllowlist_",
         "type": "uint256"
       },
       {
@@ -18,8 +23,23 @@
       },
       {
         "internalType": "uint256",
-        "name": "maxPerTx_",
+        "name": "allowlistUBMintPrice_",
         "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "allowlistMintPrice_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "publicMintPrice_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "devAddress_",
+        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -38,6 +58,70 @@
   {
     "inputs": [],
     "name": "BalanceQueryForZeroAddress",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "numerator",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "denominator",
+        "type": "uint256"
+      }
+    ],
+    "name": "ERC2981InvalidDefaultRoyalty",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "receiver",
+        "type": "address"
+      }
+    ],
+    "name": "ERC2981InvalidDefaultRoyaltyReceiver",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "numerator",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "denominator",
+        "type": "uint256"
+      }
+    ],
+    "name": "ERC2981InvalidTokenRoyalty",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "receiver",
+        "type": "address"
+      }
+    ],
+    "name": "ERC2981InvalidTokenRoyaltyReceiver",
     "type": "error"
   },
   {
@@ -62,12 +146,64 @@
   },
   {
     "inputs": [],
+    "name": "NotCompatibleWithSpotMints",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnableInvalidOwner",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "OwnableUnauthorizedAccount",
+    "type": "error"
+  },
+  {
+    "inputs": [],
     "name": "OwnerQueryForNonexistentToken",
     "type": "error"
   },
   {
     "inputs": [],
     "name": "OwnershipNotInitializedForExtraData",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ReentrancyGuardReentrantCall",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SequentialMintExceedsLimit",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SequentialUpToTooSmall",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SpotMintTokenIdTooSmall",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TokenAlreadyExists",
     "type": "error"
   },
   {
@@ -233,6 +369,24 @@
         "type": "bytes32[]"
       }
     ],
+    "name": "UBAllowlistMint",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "quantity",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes32[]",
+        "name": "merkleProof",
+        "type": "bytes32[]"
+      }
+    ],
     "name": "allowlistMint",
     "outputs": [],
     "stateMutability": "payable",
@@ -242,7 +396,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "operator",
+        "name": "to",
         "type": "address"
       },
       {
@@ -322,7 +476,7 @@
           }
         ],
         "internalType": "struct IERC721A.TokenOwnership",
-        "name": "",
+        "name": "ownership",
         "type": "tuple"
       }
     ],
@@ -371,16 +525,42 @@
     "type": "function"
   },
   {
-    "inputs": [
+    "inputs": [],
+    "name": "getAllowlistMerkleRoot",
+    "outputs": [
       {
-        "internalType": "bytes32[]",
-        "name": "merkleProof",
-        "type": "bytes32[]"
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
       }
     ],
-    "name": "freeMint",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAllowlistMintPrice",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAllowlistUBMintPrice",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -430,7 +610,98 @@
   },
   {
     "inputs": [],
-    "name": "getMintPrice",
+    "name": "getIsAllowlistMintActive",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getIsMintActive",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getIsUBAllowlistMintActive",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getMaxPerWallet",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getMaxPerWalletAllowlist",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getMaxPerWalletUBAllowlist",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getNumAllowlistMint",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getNumUBAllowlistMint",
     "outputs": [
       {
         "internalType": "uint256",
@@ -449,12 +720,31 @@
         "type": "address"
       }
     ],
-    "name": "getOwnerFreeMintCount",
+    "name": "getOwnerAllowlistMintCount",
     "outputs": [
       {
-        "internalType": "uint32",
+        "internalType": "uint16",
         "name": "",
-        "type": "uint32"
+        "type": "uint16"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      }
+    ],
+    "name": "getOwnerAllowlistUBMintCount",
+    "outputs": [
+      {
+        "internalType": "uint16",
+        "name": "",
+        "type": "uint16"
       }
     ],
     "stateMutability": "view",
@@ -471,9 +761,9 @@
     "name": "getOwnerGiftsCount",
     "outputs": [
       {
-        "internalType": "uint32",
+        "internalType": "uint16",
         "name": "",
-        "type": "uint32"
+        "type": "uint16"
       }
     ],
     "stateMutability": "view",
@@ -481,12 +771,25 @@
   },
   {
     "inputs": [],
-    "name": "getReservedFreeMint",
+    "name": "getPublicMintPrice",
     "outputs": [
       {
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getUBAllowlistMerkleRoot",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
       }
     ],
     "stateMutability": "view",
@@ -524,19 +827,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "isAllowlistMintActive",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
@@ -555,84 +845,6 @@
         "internalType": "bool",
         "name": "",
         "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "isFreeMintActive",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "isMintActive",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "maxPerTx",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "maxPerWallet",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "merkleRootAllowlist",
-    "outputs": [
-      {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "merkleRootFreeMint",
-    "outputs": [
-      {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
       }
     ],
     "stateMutability": "view",
@@ -665,19 +877,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "numFreeMint",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
@@ -691,19 +890,6 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "operatorFilteringEnabled",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -752,12 +938,12 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_tokenId",
+        "name": "tokenId",
         "type": "uint256"
       },
       {
         "internalType": "uint256",
-        "name": "_salePrice",
+        "name": "salePrice",
         "type": "uint256"
       }
     ],
@@ -819,7 +1005,7 @@
       },
       {
         "internalType": "bytes",
-        "name": "data",
+        "name": "_data",
         "type": "bytes"
       }
     ],
@@ -850,6 +1036,19 @@
       }
     ],
     "name": "setAllowlistMintActive",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_allowlistMintPrice",
+        "type": "uint256"
+      }
+    ],
+    "name": "setAllowlistMintPrice",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -932,12 +1131,12 @@
   {
     "inputs": [
       {
-        "internalType": "bool",
-        "name": "_isFreeMintActive",
-        "type": "bool"
+        "internalType": "uint256",
+        "name": "_maxPerWallet",
+        "type": "uint256"
       }
     ],
-    "name": "setFreeMintActive",
+    "name": "setMaxPerWallet",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -945,12 +1144,25 @@
   {
     "inputs": [
       {
-        "internalType": "bytes32",
-        "name": "_merkleRootFreeMint",
-        "type": "bytes32"
+        "internalType": "uint256",
+        "name": "_maxPerWalletAllowlist",
+        "type": "uint256"
       }
     ],
-    "name": "setFreeMintMerkleRoot",
+    "name": "setMaxPerWalletAllowlist",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_maxPerWalletUBAllowlist",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMaxPerWalletUBAllowlist",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -972,11 +1184,24 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_mintPrice",
+        "name": "_publicMintPrice",
         "type": "uint256"
       }
     ],
-    "name": "setMintPrice",
+    "name": "setPublicMintPrice",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_merkleRootUBAllowlist",
+        "type": "bytes32"
+      }
+    ],
+    "name": "setUBAllowlistMerkleRoot",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -985,11 +1210,11 @@
     "inputs": [
       {
         "internalType": "bool",
-        "name": "value",
+        "name": "_isUBAllowlistMintActive",
         "type": "bool"
       }
     ],
-    "name": "setOperatorFilteringEnabled",
+    "name": "setUBAllowlistMintActive",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -998,11 +1223,11 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_reservedFreeMint",
+        "name": "_allowlistUBMintPrice",
         "type": "uint256"
       }
     ],
-    "name": "setReservedFreeMint",
+    "name": "setUBAllowlistMintPrice",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1112,7 +1337,7 @@
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "",
+        "name": "result",
         "type": "uint256"
       }
     ],
