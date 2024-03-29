@@ -139,7 +139,7 @@ export default function minting_public() {
               >
                 MINT!
               </button>
-              <br />
+              {/* <br />
               <br />
               Debugging <br />
               getMaxPerWallet: {getMaxPerWallet?.data?.toNumber()} <br />
@@ -158,7 +158,7 @@ export default function minting_public() {
                 ethers.utils.formatEther(
                   ethers.BigNumber.from(getPublicMintPrice?.data || 0)
                 )
-              )}{" "}
+              )}{" "} */}
               <br />
             </>
           )}

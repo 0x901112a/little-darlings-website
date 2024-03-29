@@ -134,7 +134,7 @@ export default function minting_allowlist() {
               >
                 MINT!
               </button>
-              <br />
+              {/* <br />
               <br />
               Debugging <br />
               getMaxPerWalletAllowlist:{" "}
@@ -149,7 +149,7 @@ export default function minting_allowlist() {
                 ethers.utils.formatEther(
                   ethers.BigNumber.from(getAllowlistMintPrice?.data || 0)
                 )
-              )}{" "}
+              )}{" "} */}
               <br />
             </>
           )}

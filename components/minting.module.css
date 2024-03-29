@@ -14,6 +14,7 @@
     display: flex;
     justify-content: center;
     gap: 1em;
+    margin-bottom: 5vh;
 }
 
 .mintInfo {
@@ -81,7 +82,7 @@
 
     .mintButton {
         display: block;
-        margin: 5vh auto;
+        margin: 1vh auto;
     }
 
     .mintArea {

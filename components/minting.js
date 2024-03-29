@@ -3,6 +3,7 @@ import styles from "./minting.module.css";
 import MintingUBAllowlist from "./minting_ub_allowlist";
 import MintingAllowlist from "./minting_allowlist";
 import MintingPublic from "./minting_public"
+import MintingMinted from "./minting_minted"
 
 export default function minting({}) {
   return (
@@ -16,6 +17,7 @@ export default function minting({}) {
           <MintingUBAllowlist />
           <MintingAllowlist />
           <MintingPublic />
+          <MintingMinted />
         </div>
       </section>
 
